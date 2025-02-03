@@ -6,15 +6,15 @@
     <title>MQTT WebSocket Kliens</title>
 </head>
 <body>
-    <h2>MQTT WebSocket kliens</h2>
-    <p>📡 Kapcsolódás állapota: <span id="status">Nincs kapcsolat</span></p>
+    <h2>FITDICTIVE kliens teszt</h2>
+    <p>📡 Kapcsolat állapota: <span id="status">OFFLINE</span></p>
     
-    <button onclick="connectMQTT()">🔌 Kapcsolódás</button>
-    <button onclick="publishMessage()">📤 Üzenet küldése</button>
-    
+    <!--<button onclick="connectMQTT()">🔌 Kapcsolódás</button>-->
+    <button onclick="publishMessage()">📤 izzó kapcsolás</button>
+ <!---   
     <h3>📩 Bejövő üzenetek:</h3>
     <ul id="messages"></ul>
-
+-->
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
     <script>
         const BROKER = "wss://7ebd81b67c5d4be68971905b7c0ad248.s1.eu.hivemq.cloud:8884/mqtt";
@@ -25,7 +25,7 @@
         let client;
 
         connectMQTT();
-        
+
         function connectMQTT() {
             client = mqtt.connect(BROKER, {
                 username: USERNAME,
@@ -34,7 +34,7 @@
             });
 
             client.on("connect", () => {
-                document.getElementById("status").innerText = "✅ Kapcsolódva";
+                document.getElementById("status").innerText = "✅ ONLINE";
                 console.log("✅ Sikeresen kapcsolódva!");
 
                 // Feliratkozás a témára
@@ -46,11 +46,13 @@
             });
 
             client.on("message", (topic, message) => {
+                /*
                 console.log(`📩 Üzenet érkezett: ${message.toString()}`);
                 const msgList = document.getElementById("messages");
                 const li = document.createElement("li");
                 li.textContent = `${topic}: ${message.toString()}`;
                 msgList.appendChild(li);
+                */
             });
 
             client.on("error", (err) => {
